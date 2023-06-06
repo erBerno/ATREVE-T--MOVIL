@@ -21,7 +21,10 @@ const LoginScreen = () => {
       password: '',
     },
     validationSchema,
-    onSubmit: values => console.log(values),
+    onSubmit: values => {
+      console.log(values);
+      navigation.navigate('RequestScreen');
+    },
   });
 
   return (
