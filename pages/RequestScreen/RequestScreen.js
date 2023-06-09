@@ -1,25 +1,81 @@
-import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Button } from 'react-native';
 import RequestCard from '../../components/RequestCard';
 import RequestScreenStyle from './RequestScreenStyle/RequestScreenStyle';
+import Footer from '../../components/Footer';
+import { db } from '../../services/FirebaseConfig';
+import { collection, query, where, getDocs } from "firebase/firestore";
 
-const peticiones = [
-  // Simulación de datos
-  { id: '1', title: 'Petición 1', description: 'Descripción de la petición 1' },
-  { id: '2', title: 'Petición 2', description: 'Descripción de la petición 2' },
-  //...
-];
+const RequestScreen = (props) => {
+  const [campaigns, setCampaigns] = useState([]);
+  const [type, setType] = useState(true);
+  const [userId, setUserId] = useState(null);
 
-const RequestScreen = () => (
-  <View style={RequestScreenStyle.container}>
-    <Text style={RequestScreenStyle.title}>Peticiones del Asilo</Text>
-    <ScrollView style={RequestScreenStyle.scrollContainer}>
-      {peticiones.map(({ id, title, description }) => (
-        <RequestCard key={id} title={title} description={description} />
-      ))}
-    </ScrollView>
-  </View>
-);
+  console.log(props.route.params);
 
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      if (props.route.params && props.route.params.user) {
+        setUserId(props.route.params.user.id);
+        console.log('ID DE USUARIO: ', userId);
+      }
+      try {
+        const q = query(
+          collection(db, "campaings"),
+          where("status", "==", type ? 'active' : 'closed')
+        );
+
+        const querySnapshot = await getDocs(q);
+        const campaignList = [];
+        querySnapshot.forEach((doc) => {
+          const campaign = doc.data();
+          campaign.id = doc.id;
+          campaignList.push(campaign);
+        });
+        setCampaigns(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCampaigns();
+  }, [type]);
+  
+  console.log(campaigns);
+
+  return (
+    <View style={RequestScreenStyle.container}>
+      <Text style={RequestScreenStyle.title}>Peticiones del Asilo</Text>
+
+      <View style={RequestScreenStyle.buttonContainer}>
+        <Button
+          title="Activas"
+          onPress={() => setType(true)}
+          color={type ? '#6B7280' : '#97978D'}
+        />
+        <Button
+          title="Cerradas"
+          onPress={() => setType(false)}
+          color={type ? '#97978D' : '#6B7280'}
+        />
+      </View>
+
+      
+      
+      <Text style={RequestScreenStyle.subtitle}>Activas</Text>
+      <ScrollView style={RequestScreenStyle.scrollContainer}>
+        {campaigns.map((campaign, index) => (
+          <RequestCard key={index} title={campaign.name} description={campaign.requirement} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId})}} />
+        ))}
+      </ScrollView>
+      
+    
+      
+      <Footer />
+    </View>
+  );
+};
 
 export default RequestScreen;

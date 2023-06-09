@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../themes";
 
 const RequestCardStyle = StyleSheet.create({
     container: {
@@ -10,6 +11,7 @@ const RequestCardStyle = StyleSheet.create({
       title: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: COLORS.primary,
       },
       description: {
         marginTop: 5,

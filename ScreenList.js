@@ -1,7 +1,8 @@
+import DonationScreen from './pages/DonationScreen/DonationScreen';
+import InformationScreen from './pages/InformationScreen/InformationScreen';
 import LoginScreen from './pages/LoginScreen/LoginScreen';
 import RegisterScreen from './pages/RegisterScreen/RegisterScreen';
 import RequestScren from './pages/RequestScreen/RequestScreen';
-
 
 const ScreenList = [
     {
@@ -15,6 +16,14 @@ const ScreenList = [
     {
         name: 'RequestScreen',
         component: RequestScren,
+    },
+    {
+        name: 'InformationScreen',
+        component: InformationScreen,
+    },
+    {
+        name: 'DonationScreen',
+        component: DonationScreen,
     },
 ]
 

@@ -3,8 +3,11 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
 import RegisterScreenStyles from './RegisterScreenStyle/RegisterScreenStyle';
 import InputValidated from '../../components/InputValidated';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../../services/FirebaseConfig'
 
 
 const validationSchema = yup.object().shape({
@@ -17,7 +20,23 @@ const validationSchema = yup.object().shape({
   email: yup.string().email('Invalid Email').required('Required'),
 });
 
+
 const RegisterScreen = () => {
+  const navigation = useNavigation();
+
+  const handleRegister = async (user) => {
+    try {
+      const docRef = await addDoc(collection(db, 'users'), user);
+  
+      console.log('User added with ID: ', docRef.id);
+      alert('Registration Successful');
+      navigation.navigate('LoginScreen');
+    } catch (e) {
+      console.error('Error adding document: ', e);
+      alert('Registration Failed');
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -29,7 +48,10 @@ const RegisterScreen = () => {
       email: '',
     },
     validationSchema,
-    onSubmit: values => console.log(values),
+    onSubmit: (values) => {
+      console.log('values: ', values);
+      handleRegister(values);
+    },
   });
 
   return (
@@ -45,6 +67,7 @@ const RegisterScreen = () => {
             formikProps={formik}
             formikKey='password'
             secureTextEntry
+            autoCapitalize='none'
         />
         <InputValidated
             label='Fullname'
@@ -70,6 +93,8 @@ const RegisterScreen = () => {
             label='Email'
             formikProps={formik}
             formikKey='email'
+            keyboardType='email-address'
+            autoCapitalize='none'
         />
 
 

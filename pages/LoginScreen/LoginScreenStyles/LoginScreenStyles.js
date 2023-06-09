@@ -1,35 +1,36 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS } from "../../../themes";
 
 const LoginScreenStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         padding: 20,
-        backgroundColor: '#fff'
+        backgroundColor: COLORS.background,
     },
-    projectTitle: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-        color: 'blue'
-      },
+    logo: {
+        width: '100%', 
+        height: '30%', 
+        alignSelf: 'center', 
+        marginBottom: 20,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: COLORS.secondary,
+        fontFamily: FONTS.main,
       },
-    input: {
-        marginBottom: 20,
-    },
     button: {
         marginTop: 10,
+        backgroundColor: COLORS.primary,
+        color: COLORS.background,
     },
     registerText: {
         textAlign: 'center',
         marginTop: 20,
-        color: '#000'
+        color: COLORS.secondary,
     }
 });
 
