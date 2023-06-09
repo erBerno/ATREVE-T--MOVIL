@@ -27,7 +27,7 @@ const DonationScreen = (props) => {
       const currentDate = selectedDate || date;
       setShowDatePicker(Platform.OS === "ios");
       setDate(currentDate);
-      console.log(currentDate);
+      console.log('FECHA ELEGIDA: ', currentDate);
     };
   
 
@@ -39,7 +39,7 @@ const DonationScreen = (props) => {
             : parseInt(donationAmount);
         const description = donationDescription;
         const pickupDateTime = date;
-        const campaign_id = parseInt(campaign.id);
+        const campaign_id = `${campaign.idCampaign}`;
         const isAnonymous = anonymousDonation ? 'yes' : 'no';
   
         // Crea un objeto con los datos de la donación
@@ -50,7 +50,7 @@ const DonationScreen = (props) => {
             user_id: userId,  
             campaign_id,
             isAnonymous,
-            status: "DONADO",
+            status: "NO ENTREGADO",
         };
   
         

@@ -68,7 +68,7 @@ const RequestScreen = (props) => {
       
       <ScrollView style={RequestScreenStyle.scrollContainer}>
         {campaigns.map((campaign, index) => (
-          <RequestCard key={index} title={campaign.campaignName} description={campaign.description} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId})}} />
+          <RequestCard key={index} title={campaign.campaignName} description={campaign.description} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId}, console.log('Campaña a la que entro ', campaign))}} />
         ))}
       </ScrollView>
       
