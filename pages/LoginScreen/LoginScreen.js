@@ -7,7 +7,7 @@ import LoginScreenStyles from './LoginScreenStyles/LoginScreenStyles';
 import InputValidated from '../../components/InputValidated';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/logo-no-background.png'
-import { db } from '../../services/FirebaseConfig'
+import  db  from '../../services/FirebaseConfig'
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 

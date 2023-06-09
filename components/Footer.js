@@ -5,8 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import FooterStyle from './ComponentsStyles/FooterStyle';
 
 
-const Footer = () => {
+const Footer = (userId) => {
     const navigation = useNavigation();
+
+    console.log('FOOTER USER ID: ', userId)
 
     return (
         <SafeAreaView style={FooterStyle.safeArea}>
@@ -19,7 +21,7 @@ const Footer = () => {
                         color="#ABABAB"
                     />
                 </TouchableOpacity>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen', {userId: userId})} >
                     <Icon
                         name="user"
                         type="font-awesome"

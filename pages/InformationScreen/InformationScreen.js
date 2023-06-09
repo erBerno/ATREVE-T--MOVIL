@@ -21,14 +21,14 @@ const InformationScreen = (props) => {
         style={InformationScreenStyle.image}
       />
       <View style={InformationScreenStyle.content}>
-        <Text style={InformationScreenStyle.title}>{campaign.name}</Text>
+        <Text style={InformationScreenStyle.title}>{campaign.campaignName}</Text>
         <View style={InformationScreenStyle.dateContainer}>
           <Text style={InformationScreenStyle.dateText}>
-            Ends: {formatDateString(campaign.endDate.toDate())}
+            Termina el: {formatDateString(campaign.endDate)}
           </Text>
         </View>
-        <Text style={InformationScreenStyle.texts}>Beneficiary Type: {campaign.beneficiaryType}</Text>
-        <Text style={InformationScreenStyle.texts}>Requirement: {campaign.requirement}</Text>
+        <Text style={InformationScreenStyle.texts}>Tipo de Beneficiario: {campaign.beneficiaryType}</Text>
+        <Text style={InformationScreenStyle.texts}>Descripcion: {campaign.description}</Text>
       </View>
 
       {campaign.status === 'active' ? (
@@ -39,7 +39,7 @@ const InformationScreen = (props) => {
           }
         >
           <Text style={InformationScreenStyle.buttonText}>
-            Donate
+            Donar
           </Text>
         </TouchableOpacity>
       ) : null}

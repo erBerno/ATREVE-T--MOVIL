@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Button } from 'react-native';
 import RequestCard from '../../components/RequestCard';
 import RequestScreenStyle from './RequestScreenStyle/RequestScreenStyle';
 import Footer from '../../components/Footer';
-import { db } from '../../services/FirebaseConfig';
+import  db  from '../../services/FirebaseConfig';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 const RequestScreen = (props) => {
@@ -13,6 +13,8 @@ const RequestScreen = (props) => {
 
   console.log(props.route.params);
 
+  console.log('Campaigns: ', campaigns);
+
   useEffect(() => {
     const fetchCampaigns = async () => {
       if (props.route.params && props.route.params.user) {
@@ -21,7 +23,7 @@ const RequestScreen = (props) => {
       }
       try {
         const q = query(
-          collection(db, "campaings"),
+          collection(db, "campaigns"),
           where("status", "==", type ? 'active' : 'closed')
         );
 
@@ -43,7 +45,6 @@ const RequestScreen = (props) => {
     fetchCampaigns();
   }, [type]);
   
-  console.log(campaigns);
 
   return (
     <View style={RequestScreenStyle.container}>
@@ -67,13 +68,13 @@ const RequestScreen = (props) => {
       <Text style={RequestScreenStyle.subtitle}>Activas</Text>
       <ScrollView style={RequestScreenStyle.scrollContainer}>
         {campaigns.map((campaign, index) => (
-          <RequestCard key={index} title={campaign.name} description={campaign.requirement} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId})}} />
+          <RequestCard key={index} title={campaign.campaignName} description={campaign.description} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId})}} />
         ))}
       </ScrollView>
       
     
       
-      <Footer />
+      <Footer userId={userId} />
     </View>
   );
 };
