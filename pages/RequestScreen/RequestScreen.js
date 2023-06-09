@@ -65,7 +65,7 @@ const RequestScreen = (props) => {
 
       
       
-      <Text style={RequestScreenStyle.subtitle}>Activas</Text>
+      
       <ScrollView style={RequestScreenStyle.scrollContainer}>
         {campaigns.map((campaign, index) => (
           <RequestCard key={index} title={campaign.campaignName} description={campaign.description} onPress={() => {props.navigation.navigate('InformationScreen', {campaign: campaign, userId: userId})}} />

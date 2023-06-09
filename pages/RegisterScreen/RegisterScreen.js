@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import RegisterScreenStyles from './RegisterScreenStyle/RegisterScreenStyle';
 import InputValidated from '../../components/InputValidated';
 import { collection, addDoc } from "firebase/firestore";
-import { db } from '../../services/FirebaseConfig'
+import db  from '../../services/FirebaseConfig'
 
 
 const validationSchema = yup.object().shape({
@@ -41,7 +41,7 @@ const RegisterScreen = () => {
     initialValues: {
       username: '',
       password: '',
-      fullname: '',
+      fullName: '',
       ci: '',
       location: '',
       phone: '',
@@ -72,7 +72,7 @@ const RegisterScreen = () => {
         <InputValidated
             label='Fullname'
             formikProps={formik}
-            formikKey='fullname'
+            formikKey='fullName'
         />
         <InputValidated
             label='CI'

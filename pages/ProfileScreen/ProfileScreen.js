@@ -44,15 +44,15 @@ const ProfileScreen = (props) => {
                 </TouchableOpacity>
                 <Text style={styles.title}>Mis Donaciones</Text>
             </View>
-            
+
 
             <ScrollView style={styles.donationsContainer}>
                 {donations.map((donation, index) => (
                     <View key={index} style={styles.donationItem}>
                         <Text style={styles.donationText}>Campaña: {donation.campaign_id}</Text>
-                        <Text style={styles.donationText}>Camtidad: {donation.quantity}</Text>
+                        <Text style={styles.donationText}>Cantidad: {donation.quantity}</Text>
                         <Text style={styles.donationText}>Descripcion: {donation.description}</Text>
-                        <Text style={styles.donationText}>FFecha de Recojo: {new Date(donation.pickupDateTime?.seconds * 1000).toLocaleDateString()}</Text>
+                        <Text style={styles.donationText}>Fecha de Recojo: {new Date(donation.pickupDateTime?.seconds * 1000).toLocaleDateString()}</Text>
                         <Text style={styles.donationText}>Esatdo: {donation.status}</Text>
                     </View>
                 ))}
